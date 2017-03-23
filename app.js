@@ -20,6 +20,7 @@ mongoose.Promise = Promise;
 var index = require('./controllers/index');
 var users = require('./controllers/users');
 var game = require('./controllers/game');
+var questions = require('./controllers/questions');
 
 // database connection
 var db = mongoose.connection;
@@ -31,7 +32,7 @@ db.once('open', function() {
 // express
 var app = express();
 
-// socket.io 
+// socket.io
 var socket_io = require('socket.io');
 var io = socket_io();
 app.io = io;
@@ -68,6 +69,7 @@ app.use(middleware.simpleAuth);
 app.use('/', index);
 app.use('/users', users);
 app.use('/game', game);
+app.use('/questions', questions);
 
 app.get('/logout', function(req, res) {
   req.session.reset();

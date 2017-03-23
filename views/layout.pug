@@ -12,7 +12,7 @@ html(lang='en')
     //- script
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-    
+
     //- make socket avalable on all pages I hope
     script(src='/socket.io/socket.io.js')
     //- Custom Fonts
@@ -25,21 +25,18 @@ html(lang='en')
           a.navbar-brand(href='/logout') Project 3 Group 1
         ul.nav.navbar-nav.navbar-nav-center
           li
-            a(href='/game') Welcome  
+            a(href='/game') Welcome
               span#myName= userName
         ul.nav.navbar-nav.navbar-right
           li
             a(href='/users/join') Join Game
           li
             a(href='/users/create') Create Game
-        
+          li
+            a(href='/questions') Questions
+
     .container
 
     block scripts
 
     block content
-  
-
-   
-    
-    

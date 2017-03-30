@@ -24,30 +24,21 @@ window.onload = ()=>{
         console.log('client-getGameCategories', categories, categories.length);
         console.log('hi')
         cat = categories;
-        $('.game').append('<form>')
         for(i=0;cat.length>i;i++){
           console.log('inside')
-            $('.game').append('<div><label><input type="radio" name="radio" id="'+ 
-                cat[i] + '">' + cat[i] + '</input></label></div>');
+            $('.game').append('<div><label><input type="checkbox" id="'+ cat[i] + '">' + cat[i] + '</input></label></div>');
         };
-        $('.game').append('</form>');
+        $('.game').append('<div>test this </div>');
     });
-
-    socket.on('client-newRound', function(round){
-        $('.game').children().remove();
-        $('.game').append(`we have a round`);
-        console.log(round);
-    })
 
     $('#submit').click(function (e) {
         // make game object
         let round = {
-            gameCode: gameInfo.gameCode,
             category: '',
             playerQuestions: {},
             playerAnswers: {}
         }
-        
+
         // use for loop to get categories
         cat.forEach(function(element){
             if(document.getElementById(element).checked) // check for checked
@@ -57,11 +48,12 @@ window.onload = ()=>{
             }
         });
 
-        socket.emit('server-createRound', round);
 
-        
-        console.log('create Round');
+
+        socket.emit('createRound', round);
+        console.log('click join');
     });
+
 
     socket.on('message', (msg) =>{
         console.log(msg);

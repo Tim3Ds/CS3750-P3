@@ -1,13 +1,14 @@
 extends layout
 
 block content
-  .game
+  .container
+    .game
 
-  #gameInfo game page
-    p#username= userName
-    p#gameCode= gameCode
+    #gameInfo game page
+      p#username= userName
+      p#gameCode= gameCode
 
-  button#test.btn.btn-primary(type='submit') Action
+    button#submit.btn.btn-primary(type='submit') Action
 
 block scripts
   script(src='/scripts/_game.js')

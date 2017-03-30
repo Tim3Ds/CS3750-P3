@@ -88,30 +88,31 @@ module.exports = (io) => {
             console.log(games);
         });
 
-        socket.on('server-createRound', function(round){
-            let test = games.filter(function(e) { return e.gameCode == msg.gameCode; }).length > 0;
+        socket.on('server-createRound', function(game){
+            let test = games.filter(function(e) { return e.gameCode == game.gameCode; }).length > 0;
             if(test){
                 // generate on client
                 // // make new round template
                 // var round = {
-                //     category: '',
+                //     category: game.category,
                 //     playerQuestions: {},
                 //     playerAnswers: {}
                 // }
                 // find the index of the game with gameCode
-                let dex = games.findIndex(function(e) { return e.gameCode == msg.gameCode; });
+                let dex = games.findIndex(function(e) { return e.gameCode == game.gameCode; });
                 // // set round catigory
                 // round.category = msg.category;
                 // addPlayers to round
                 for(i=0;games[dex].playerCount>i;i++){
                     var player = 'player' + i;
-                    round.playerAnswers[player] = '';
-                    round.playerQuestions[player] = '';
+                    game.playerAnswers[player] = '';
+                    game.playerQuestions[player] = '';
                 }
                 // add new round to game 
-                games[dex].round.push(round);
+                games[dex].round.push(game);
                 // send updated game object to all players in the game (not yet implimented)
-                socket.emit('client-newRound', round)
+                socket.emit('client-newRound', game)
+                console.log(games);
             }else{
                io.sockets.in(msg.gameCode).emit('message', { 
                     username: 'Game Server', 
